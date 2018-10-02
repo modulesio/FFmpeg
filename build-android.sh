@@ -1,10 +1,15 @@
-
 #!/bin/bash
-#Change NDK to your Android NDK location
-NDK=/home/chrislatorres/Exokit/android-ndk-r15c
-PLATFORM=$NDK/platforms/android-26/arch-arm64/
-PREBUILT=$NDK/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64
 
+# ./build-android.sh ANDROID_VERSION
+
+args=("$@")
+ANDROID_VERSION=${args[0]} || 26
+
+# Make sure ANDROID_NDK_HOME set in .bash_profile.
+NDK=$ANDROID_NDK_HOME
+ARCH=`ls $NDK/toolchains/aarch64-linux-android-4.9/prebuilt/`;
+PREBUILT=$NDK/toolchains/aarch64-linux-android-4.9/prebuilt/${ARCH}
+PLATFORM=$NDK/platforms/android-$ANDROID_VERSION/arch-arm64/
 
 GENERAL="\
 --enable-small \
@@ -21,10 +26,9 @@ GENERAL="\
 # --enable-gpl \
 # --enable-libx264"
 
-
-
 function build_arm64
 {
+  echo "Configuring..."
   ./configure --disable-everything --disable-all --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-static --enable-avcodec --enable-avformat --enable-avutil --enable-fft --enable-rdft --enable-static --enable-libopus --disable-debug --disable-bzlib --disable-error-resilience --disable-iconv --disable-lzo --disable-network --disable-schannel --disable-sdl2 --disable-symver --disable-xlib --disable-zlib --disable-securetransport --disable-faan --disable-alsa --disable-autodetect --enable-decoder='vorbis,libopus,flac' --enable-decoder='pcm_u8,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,mp3' --enable-decoder='pcm_s16be,pcm_s24be,pcm_mulaw,pcm_alaw' --enable-demuxer='ogg,matroska,wav,flac,mp3,mov' --enable-parser='opus,vorbis,flac,mpegaudio' \
   --disable-linux-perf --x86asmexe=yasm --enable-small --enable-cross-compile \
   --logfile=conflog.txt \
@@ -43,6 +47,5 @@ function build_arm64
 }
 
 build_arm64
-
 
 echo Android ARM64 builds finished
