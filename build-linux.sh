@@ -9,7 +9,7 @@ popd
 
 # deps/x264/libx264.a
 pushd ./deps/x264
-./configure --enable-static --disable-shared --disable-opencl --enable-pic
+./configure --enable-static --disable-opencl --enable-pic
 make clean
 make -j4
 popd
