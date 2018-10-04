@@ -118,7 +118,7 @@ esac
 # Here we must recognize all the valid KERNEL-OS combinations.
 maybe_os=`echo $1 | sed 's/^\(.*\)-\([^-]*-[^-]*\)$/\2/'`
 case $maybe_os in
-  nto-qnx* | linux-gnu* | kfreebsd*-gnu* | netbsd*-gnu* | storm-chaos* | os2-emx* | rtmk-nova*)
+  nto-qnx* | linux-gnu* | -linux-android* | kfreebsd*-gnu* | netbsd*-gnu* | storm-chaos* | os2-emx* | rtmk-nova*)
     os=-$maybe_os
     basic_machine=`echo $1 | sed 's/^\(.*\)-\([^-]*-[^-]*\)$/\1/'`
     ;;
@@ -228,7 +228,7 @@ case $basic_machine in
 	| a29k \
 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
-	| arc | arm | arm[bl]e | arme[lb] | armv[2345] | armv[345][lb] | avr \
+	| arc | arm | arm[bl]e | arme[lb] | armv[2345] | armv[345][lb] | avr | aarch64 \
 	| c4x | clipper \
 	| d10v | d30v | dlx | dsp16xx \
 	| fr30 | frv \
@@ -293,7 +293,7 @@ case $basic_machine in
 	| alpha-* | alphaev[4-8]-* | alphaev56-* | alphaev6[78]-* \
 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
 	| alphapca5[67]-* | alpha64pca5[67]-* | amd64-* | arc-* \
-	| arm-*  | armbe-* | armle-* | armeb-* | armv*-* \
+	| arm-*  | armbe-* | armle-* | armeb-* | armv*-* | aarch64-* \
 	| avr-* \
 	| bs2000-* \
 	| c[123]* | c30-* | [cjt]90-* | c4x-* | c54x-* | c55x-* | c6x-* \
@@ -1115,7 +1115,7 @@ case $os in
 		os=-sysv4.2uw
 		;;
 	-gnu/linux*)
-		os=`echo $os | sed -e 's|gnu/linux|linux-gnu|'`
+		os=`echo $os | sed -e 's|gnu/linux|linux-gnu|-linux-android|'`
 		;;
 	# First accept the basic system types.
 	# The portable systems comes first.
@@ -1134,7 +1134,7 @@ case $os in
 	      | -udi* | -eabi* | -lites* | -ieee* | -go32* | -aux* \
 	      | -chorusos* | -chorusrdb* \
 	      | -cygwin* | -pe* | -psos* | -moss* | -proelf* | -rtems* \
-	      | -mingw32* | -linux-gnu* | -uxpv* | -beos* | -mpeix* | -udk* \
+	      | -mingw32* | -linux-gnu* | -linux-android* | -uxpv* | -beos* | -mpeix* | -udk* \
 	      | -interix* | -uwin* | -mks* | -rhapsody* | -darwin* | -opened* \
 	      | -openstep* | -oskit* | -conix* | -pw32* | -nonstopux* \
 	      | -storm-chaos* | -tops10* | -tenex* | -tops20* | -its* \
@@ -1166,6 +1166,9 @@ case $os in
 		;;
 	-linux*)
 		os=`echo $os | sed -e 's|linux|linux-gnu|'`
+		;;
+  -android*)
+		os=`echo $os | sed -e 's|linux|linux-android|'`
 		;;
 	-sunos5*)
 		os=`echo $os | sed -e 's|sunos5|solaris2|'`
