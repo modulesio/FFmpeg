@@ -25,8 +25,8 @@ cd lame
 ln -s ../lame.h .
 popd
 
-# deps/rmpdump/librtmp/librtmp.a
-pushd ./deps/rmpdump
+# deps/rtmpdump/librtmp/librtmp.a
+pushd ./deps/rtmpdump
 make clean
 make CRYPTO= SHARED= -j4
 popd
