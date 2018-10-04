@@ -19,10 +19,8 @@ pushd ./deps/lame
 ./configure --enable-static --disable-shared
 make clean
 make -j4
-cd include
-mkdir lame
-cd lame
-ln -s ../lame.h .
+mkdir -p include/lame
+cp -f include/lame.h include/lame/lame.h
 popd
 
 # deps/rtmpdump/librtmp/librtmp.a
