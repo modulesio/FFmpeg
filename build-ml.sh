@@ -38,6 +38,10 @@ popd
 # deps/lame/libmp3lame/.libs/libmp3lame.a
 pushd ./deps/lame
 ./configure --enable-static --disable-shared --host="aarch64-linux-android" --build="x86_64-linux-gnu"
+find . -type f -iname '*.Plo' -exec sed -i 's/C:\\/\/mnt\/c\//gi' "{}" +;
+find . -type f -iname '*.Plo' -exec sed -i 's/\([^ ]\)\\/\1\//gi' "{}" +;
+find . -type f -iname '*.Po' -exec sed -i 's/C:\\/\/mnt\/c\//gi' "{}" +;
+find . -type f -iname '*.Po' -exec sed -i 's/\([^ ]\)\\/\1\//gi' "{}" +;
 make clean
 make -j4
 mkdir -p include/lame
