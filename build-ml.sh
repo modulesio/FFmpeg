@@ -54,8 +54,7 @@ make clean
 make CRYPTO= SHARED= CROSS_COMPILE="aarch64-linux-android-" THREADLIB= -j4
 popd
 
-
- 
+mkdir "$TEMPDIR"
  
 # https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/master/chromium/config/Chrome/linux/x64/config.h
 ./configure --enable-cross-compile --sysroot="$SYSROOT" --cross-prefix="aarch64-linux-android-" --extra-cflags="-I$MLSDK/lumin/stl/libc++/include" --extra-cflags="-I$MLSDK/lumin/usr/include" --extra-cflags='--target=aarch64-linux-android' --extra-cflags='-DLUMIN' --extra-ldflags='--target=aarch64-linux-android' --extra-ldflags="--gcc-toolchain=$MLSDK/tools/toolchains/bin" --target-os=android --arch=aarch64 --enable-armv8 --extra-cflags='-march=armv8-a' --cc="$MLSDK/tools/toolchains/bin/aarch64-linux-android-gcc" --cxx="$MLSDK/tools/toolchains/bin/aarch64-linux-android-g++" --ld="$MLSDK/tools/toolchains/bin/aarch64-linux-android-ld" \
