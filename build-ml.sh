@@ -40,10 +40,13 @@ popd
 --extra-cflags="-I$MLSDK/lumin/stl/libc++/include" \
 --extra-cflags="-I$MLSDK/lumin/usr/include" \
 --extra-cflags=-I./deps/opus/include \
+--extra-cflags=-I./deps/x264 \
 --extra-cflags='--target=aarch64-linux-android' \
 --extra-cflags='-DLUMIN' \
 --extra-ldflags='--target=aarch64-linux-android' \
 --extra-ldflags="--gcc-toolchain=$MLSDK/tools/toolchains/bin" \
+--extra-ldflags=-L./deps/x264 \
+--extra-libs=-lx264 \
 --target-os=android --arch=aarch64 --enable-armv8 --extra-cflags='-march=armv8-a' --enable-pic --enable-avfilter --enable-swscale --enable-swresample --enable-avdevice \
 --cc="$MLSDK/tools/toolchains/bin/aarch64-linux-android-gcc" \
 --cxx="$MLSDK/tools/toolchains/bin/aarch64-linux-android-g++" \
