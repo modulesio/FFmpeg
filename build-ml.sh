@@ -14,7 +14,7 @@ export SYSROOT="$MLSDK/lumin"
 export PATH="$PATH:$TOOLCHAIN"
 export TEMPDIR="$(pwd)/tmp"
 
-./magicleap-js/hack-toolchain.js
+../magicleap-js/hack-toolchain.js
 
 # opus
 pushd ./deps/opus
