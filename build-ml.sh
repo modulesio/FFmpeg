@@ -51,7 +51,9 @@ popd
 --cc="$MLSDK/tools/toolchains/bin/aarch64-linux-android-gcc" \
 --cxx="$MLSDK/tools/toolchains/bin/aarch64-linux-android-g++" \
 --ld="$MLSDK/tools/toolchains/bin/aarch64-linux-android-ld" \
---enable-demuxer=aac --enable-parser=aac --enable-decoder=aac
+--enable-demuxer=aac --enable-parser=aac --enable-decoder=aac \
+--enable-parser='mpegvideo,mpeg4video' --enable-decoder='mpegvideo,mpeg1video,mpeg2video,mpeg4' --enable-demuxer='mpegps,mpegts,mpegtsraw,mpegvideo' \
+--enable-gpl --enable-nonfree --enable-libx264 --enable-decoder='theora,vp8' --enable-parser='vp3,vp8' --enable-pic --enable-decoder='aac,h264' --enable-demuxer=aac --enable-parser='aac,h264'
 
 # rm -f */*.d */*/*.d
 
