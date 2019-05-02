@@ -34,7 +34,7 @@ fi
 # avresample
 #CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-avresample"
 
-ARCHS="arm64 armv7 x86_64 i386"
+ARCHS="arm64 x86_64"
 
 COMPILE="y"
 LIPO="y"
@@ -125,18 +125,21 @@ then
 			LDFLAGS="$LDFLAGS -L$FDK_AAC/lib"
 		fi
 
-		TMPDIR=${TMPDIR/%\/} $SOURCE/configure \
-		    --target-os=darwin \
-		    --arch=$ARCH \
-		    --cc="$CC" \
-		    --as="$AS" \
-		    $CONFIGURE_FLAGS \
-		    --extra-cflags="$CFLAGS" \
-		    --extra-ldflags="$LDFLAGS" \
-		    --prefix="$THIN/$ARCH" \
-		|| exit 1
+    if [ ! -d "$THIN/$ARCH" ]
+    then
+      TMPDIR=${TMPDIR/%\/} $SOURCE/configure \
+          --target-os=darwin \
+          --arch=$ARCH \
+          --cc="$CC" \
+          --as="$AS" \
+          $CONFIGURE_FLAGS \
+          --extra-cflags="$CFLAGS" \
+          --extra-ldflags="$LDFLAGS" \
+          --prefix="$THIN/$ARCH" \
+      || exit 1
 
-		make -j3 install $EXPORT || exit 1
+      make -j3 install $EXPORT || exit 1
+    fi
 		cd $CWD
 	done
 fi
@@ -156,7 +159,7 @@ then
 	done
 
 	cd $CWD
-	cp -rf $THIN/$1/include $FAT
+	#cp -rf $THIN/$1/include $FAT
 fi
 
 echo Done
